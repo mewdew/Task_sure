@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Angular Material requires Angular.js Libraries -->
+
+<!--  <link rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="app.js"></script>-->
+</head>
+
+
+<style>
+    body {
+        background-image:url('bg.jpg');
+        color: white;
+    }
+
+    .sep {
+        background-color: gainsboro;
+        border-radius: 12px;
+    }
+
+    .oLine {
+        border: 1px solid #4a4a4a;
+        border-radius: 12px;
+    }
+
+   .wrapper {
+       height: 100vh;
+   }
+
+    #imenu {
+        background-color: transparent;
+        border: 2px solid white;
+    }
+
+    #iplay {
+        background-color: transparent;
+        border: 2px solid white;
+    }
+
+    
+
+
+
+</style>
+
+<body ng-app="sureApp" ng-cloak ng-controller="sureCtrl">
+
+<!--<div layout="column">
+
+    <div layout="row">
+        <md-button ng-click="toggleLeft()" class="md-raised">
+            Toggle Sidenav
+        </md-button>
+    </div>
+    <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop="" md-whiteframe="4">
+
+        <md-button ng-click="toggleLeft()" class="md-accent">
+            Close this Sidenav
+        </md-button>
+
+        <md-toolbar class="md-theme-indigo">
+            <h1 class="md-toolbar-tools">Disabled Backdrop</h1>
+        </md-toolbar>
+
+        <md-content layout-margin>
+            <p>
+                Menu items go here
+            </p>
+
+        </md-content>
+
+    </md-sidenav>
+
+    <div layout="row" layout-margin>
+        <div flex="30">
+            <md-card layout="column" layout-padding>
+                <div flex="5" layout="row" layout-align="center center" class="md-headline">My Home</div>
+                <div layout="column" layout-padding>
+                    <div flex="5" class="sep"></div>
+
+                    <div flex="40" layout="column">
+                        <p>Dining Hall</p>
+                        <div layout="row" layout-xs="column">
+                            <md-button class="sep oLine" flex="50"></md-button>
+                            <md-button class="sep oLine" flex="50"></md-button>
+                        </div>
+                        <div layout="row" layout-xs="column">
+                            <md-button class="sep oLine" flex="50"></md-button>
+                            <md-button class="sep oLine" flex="50"></md-button>
+                        </div>
+                    </div>
+                    <div flex="50"layout="column">
+                        <p>Front of main gate</p>
+                        <md-button class="sep oLine"></md-button>
+                    </div>
+                </div>
+
+            </md-card>
+        </div>
+        <div flex="70">
+            <div flex="100" layout="column" ng-show="true" layout-fill>
+                <div flex="50" layout="row" layout-align="center end" class="md-display-3">Time-widget</div>
+                <div flex="50" layout="row" layout-align="center center" class="md-display-3">Hi Shivangi, how are you?</div>
+            </div>
+        </div>
+    </div>
+
+
+</div>-->
+
+<div layout="column" class="wrapper">
+    <div flex>
+        <div layout="row">
+            <md-button ng-click="toggleLeft()" class="md-raised">
+                <md-icon class="material-icons">menu</md-icon>
+            </md-button>
+        </div>
+        <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop="" md-whiteframe="4">
+
+            <md-button ng-click="toggleLeft()" class="md-accent">
+                Close this Sidenav
+            </md-button>
+
+            <md-toolbar class="md-theme-indigo">
+                <h1 class="md-toolbar-tools">Disabled Backdrop</h1>
+            </md-toolbar>
+
+            <md-content layout-margin>
+                <p>
+                    Menu items go here
+                </p>
+
+            </md-content>
+
+        </md-sidenav>
+    </div>
+    <div flex="90" layout="row" layout-padding>
+        <div flex="30" layout="column">
+            <md-card flex="100" layout="column" layout-margin>
+                    <div flex="5" class="md-title" layout="row" layout-align="center center">My Home</div>
+                    <div flex="5" class="sep" ng-click="showHome()"></div>
+                    <div flex="40" layout="column" layout-margin>
+                        <div flex="5" class="md-subhead">Dining Hall</div>
+                        <div flex="45" layout="row">
+                            <md-button ng-click="showdh()" flex="50" class="sep oLine"></md-button>
+                            <md-button ng-click="showdh()"  flex="50" class="sep oLine"></md-button>
+                        </div>
+                        <div flex="45" layout="row">
+                            <md-button ng-click="showdh()"  flex="50" class="sep oLine"></md-button>
+                            <md-button ng-click="showdh()"  flex="50" class="sep oLine"></md-button>
+                        </div>
+                    </div>
+                    <div flex="50" layout="column" layout-margin>
+                        <div flex="5" class="md-subhead">Front of the main gate</div>
+                        <md-button ng-click="showfd()" flex="95" class="sep oLine"></md-button>
+                    </div>
+            </md-card>
+        </div>
+        <div flex="70" layout="column">
+            <div flex="70">
+                <div flex="100" layout="column" ng-hide="frontDoor || diningView" ng-show="homeView" layout-fill>
+                    <div flex="50" layout="row" layout-align="center end" class="md-display-3">Time-widget</div>
+                    <div flex="50" layout="row" layout-align="center center" class="md-display-3">Hi Shivangi, how are you?</div>
+                </div>
+
+                <div flex="100" layout="column" ng-show="frontDoor" layout-fill>
+                    <div flex="20" layout="row" layout-align="center end" class="md-display-3">Front doorbell</div>
+                    <div flex="20" layout="row" layout-align="center center">
+                        <md-button class="md-fab" id="iplay">
+                            <md-icon class="material-icons">play_arrow</md-icon>
+                        </md-button>
+                    </div>
+                </div>
+
+                <div flex="100" layout="column" ng-show="diningView" layout-fill>
+                    <div flex="20" layout="row" layout-align="center end" class="md-display-3">Dining room Revogee</div>
+                    <div flex="20" layout="row" layout-align="center center">
+                        <md-slider-container flex="75">
+                            <span class="md-title">Min</span>
+                            <md-slider flex="" class="md-accent">
+                            </md-slider>
+                            <span class="md-title">Max</span>
+                        </md-slider-container>
+                    </div>
+                </div>
+            </div>
+            <div flex="15" layout="row" layout-align="end end" layout-margin>
+                    <md-fab-speed-dial>
+                        <md-fab-trigger>
+                            <md-button aria-label="menu" id="imenu" class="md-fab">
+                                <md-icon class="material-icons">menu</md-icon>
+                            </md-button>
+                        </md-fab-trigger>
+                </md-fab-speed-dial>
+            </div>
+            <div flex="15" layout="row" layout-align="end center" layout-margin>
+                <div flex="20" layout-fill>
+                    <md-card ng-hide="homeView" ng-click="openEvent()" layout="row" layout-padding>
+                        <div flex="30"><img src="network.svg" height="30px"></div>
+                        <div flex="30" class="md-headline">
+                            Events
+                        </div>
+                    </md-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+
+<script>
+    angular
+        .module('sureApp',['ngMaterial'])
+        .controller('sureCtrl', function ($scope, $timeout, $mdSidenav) {
+            $scope.toggleLeft = buildToggler('left');
+            $scope.toggleRight = buildToggler('right');
+
+            function buildToggler(componentId) {
+                return function() {
+                    $mdSidenav(componentId).toggle();
+                }
+            }
+
+            $scope.homeView = true;
+            $scope.frontDoor = false;
+            $scope.diningView = false;
+
+            $scope.showfd = function (){
+                $scope.frontDoor = true;
+                $scope.diningView = false;
+                $scope.homeView = false;
+            };
+
+            $scope.showdh = function (){
+                $scope.diningView = true;
+                $scope.frontDoor = false;
+                $scope.homeView = false;
+            };
+
+            $scope.showHome = function (){
+                $scope.diningView = false;
+                $scope.frontDoor = false;
+                $scope.homeView = true;
+            };
+
+            $scope.openEvent() = function () {
+                if($scope.diningView) {
+
+                }
+            };
+
+        });
+
+</script>
+	
+</body>  
+</html>
