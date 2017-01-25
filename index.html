@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Angular Material requires Angular.js Libraries -->
+    <!--<link type="text/css" rel="stylesheet" href="angular-lightbox.css" />-->
 
-<!--  <link rel="stylesheet" href="styles.css">
-  <script type="text/javascript" src="app.js"></script>-->
+<!--  <link rel="stylesheet" href="styles.css"><script type="text/javascript" src="app.js"></script>-->
 </head>
 
 
@@ -171,28 +170,75 @@
                 <div flex="100" layout="column" ng-show="frontDoor" layout-fill>
                     <div flex="20" layout="row" layout-align="center end" class="md-display-3">Front doorbell</div>
                     <div flex="20" layout="row" layout-align="center center">
-                        <md-button class="md-fab" id="iplay">
+                        <md-button class="md-fab" id="iplay" ng-hide="showtab">
                             <md-icon class="material-icons">play_arrow</md-icon>
                         </md-button>
+                    </div>
+                    <!--md-tab-->
+                    <div ng-cloak="" ng-show="showtab" class="tabsdemoDynamicHeight">
+                        <md-content>
+                            <md-tabs md-dynamic-height="" md-border-bottom="">
+                                <md-tab label="Events">
+                                    <md-content class="md-padding" ng-repeat="i in [1,2,3]" layout="row">
+                                        <div flex="30">
+                                            <img src="bg.jpg" height="125px">
+                                        </div>
+                                        <div flex="40" layout="column">
+                                            <div flex="50">Event Title</div>
+                                            <div flex="50">Event Desc</div>
+                                        </div>
+                                        <div flex="30">
+                                            <iframe width="200" height="125" src="https://www.youtube.com/watch?v=Q0OKM6SCK7c">
+                                            </iframe>
+                                        </div>
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="Calendar">
+                                    <md-content class="md-padding">
+                                        <h1 class="md-display-2">Tab Two</h1>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus.</p>
+                                    </md-content>
+                                </md-tab>
+                            </md-tabs>
+                        </md-content>
                     </div>
                 </div>
 
                 <div flex="100" layout="column" ng-show="diningView" layout-fill>
                     <div flex="20" layout="row" layout-align="center end" class="md-display-3">Dining room Revogee</div>
                     <div flex="20" layout="row" layout-align="center center">
-                        <md-slider-container flex="75">
+                        <md-slider-container ng-hide="showtab" flex="75">
                             <span class="md-title">Min</span>
                             <md-slider flex="" class="md-accent">
                             </md-slider>
                             <span class="md-title">Max</span>
                         </md-slider-container>
                     </div>
+                    <!--md-tab-->
+                    <div ng-show="showtab" ng-cloak="" class="tabsdemoDynamicHeight">
+                        <md-content>
+                            <md-tabs md-dynamic-height="" md-border-bottom="">
+                                <md-tab label="Events">
+                                    <md-content class="md-padding">
+                                        <h1 class="md-display-2">Tab One</h1>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices.</p>
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="Calendar">
+                                    <md-content class="md-padding">
+                                        <h1 class="md-display-2">Tab Two</h1>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus.</p>
+                                    </md-content>
+                                </md-tab>
+                            </md-tabs>
+                        </md-content>
+                    </div>
                 </div>
             </div>
             <div flex="15" layout="row" layout-align="end end" layout-margin>
                     <md-fab-speed-dial>
                         <md-fab-trigger>
-                            <md-button aria-label="menu" id="imenu" class="md-fab">
+                            <md-button ng-hide="showtab" aria-label="menu" id="imenu" class="md-fab">
                                 <md-icon class="material-icons">menu</md-icon>
                             </md-button>
                         </md-fab-trigger>
@@ -200,7 +246,7 @@
             </div>
             <div flex="15" layout="row" layout-align="end center" layout-margin>
                 <div flex="20" layout-fill>
-                    <md-card ng-hide="homeView" layout="row" layout-padding>
+                    <md-card ng-hide="homeView" ng-click="showtab =!showtab" layout="row" layout-padding>
                         <div flex="30"><img src="network.svg" height="30px"></div>
                         <div flex="30" class="md-headline">
                             Events
@@ -219,7 +265,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-
+<!--<script src="angular-lightbox.js"></script>-->
 <!-- Angular Material Library -->
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
@@ -240,6 +286,7 @@
             $scope.homeView = true;
             $scope.frontDoor = false;
             $scope.diningView = false;
+            $scope.showtab = false;
 
             $scope.showfd = function (){
                 $scope.frontDoor = true;
