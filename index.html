@@ -16,6 +16,11 @@
         background-image:url('bg.jpg');
         color: white;
     }
+    
+    #nav-menu {
+        color: white;
+        font-size: 34px;
+    }
 
     .sep {
         background-color: gainsboro;
@@ -114,20 +119,17 @@
 
 <div layout="column" class="wrapper">
     <div flex>
-        <div layout="row">
-            <md-button ng-click="toggleLeft()" class="md-raised">
-                <md-icon class="material-icons">menu</md-icon>
+        <div layout="row" layout-align="start center" flex>
+            <md-button ng-click="toggleLeft()">
+                <md-icon class="material-icons" id="nav-menu">menu</md-icon>
             </md-button>
+            <span flex class="md-display-1">Sure</span>
         </div>
         <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop="" md-whiteframe="4">
 
             <md-button ng-click="toggleLeft()" class="md-accent">
                 Close this Sidenav
             </md-button>
-
-            <md-toolbar class="md-theme-indigo">
-                <h1 class="md-toolbar-tools">Disabled Backdrop</h1>
-            </md-toolbar>
 
             <md-content layout-margin>
                 <p>
